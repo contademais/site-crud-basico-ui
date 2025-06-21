@@ -9,13 +9,13 @@ function Sobre() {
   const permissions = {
     1: "Usuario",
     2: "Moderador",
-    3: "Admin",
+    3: "Administrador",
   };
 
   const cores = {
-    Admin: "bg-purple-600",
-    Moderador: "bg-yellow-600",
-    Usuario: "bg-blue-600",
+    1: "bg-blue-600",
+    2: "bg-yellow-600",
+    3: "bg-purple-600",
   };
 
   async function Usuarios() {
@@ -87,8 +87,8 @@ function Sobre() {
               <div
                 key={user.id}
                 className={
-                  "w-[300px] rounded-2xl p-5 font-bold text-white " +
-                  cores[permissions[user.permLevel]]
+                  "w-[250px] md:w-[300px] rounded-2xl p-5 font-bold text-white " +
+                  cores[user.permLevel]
                 }
               >
                 <div>

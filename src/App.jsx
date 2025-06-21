@@ -7,6 +7,18 @@ function App() {
   const [user, setUser] = useState({});
   const EmailInput = useRef();
 
+  const permissions = {
+    1: "Usuario",
+    2: "Moderador",
+    3: "Administrador",
+  };
+
+  const cores = {
+    1: "bg-blue-600",
+    2: "bg-yellow-600",
+    3: "bg-purple-600",
+  };
+
   async function getUser() {
     await api
       .get(`/users/${EmailInput.current.value}`, {
@@ -23,9 +35,11 @@ function App() {
   return (
     <div className="h-auto min-h-screen max-w-screen min-w-screen bg-green-800">
       <Navbar />
-      <div className="flex flex-col items-center justify-evenly h-[90vh]">
+      <div className="flex flex-col items-center overflow-x-hidden justify-evenly h-[90vh] min-h-[90vh] max-w-[100vw]">
         <div id="Titulo">
-          <h1 className="font-bold text-3xl text-white">Pesquisa de ID's</h1>
+          <h1 className="font-bold text-3xl text-white max-w-80%">
+            Pesquisa de emails
+          </h1>
         </div>
         <div className="flex flex-col gap-5">
           <input
@@ -41,12 +55,12 @@ function App() {
             Buscar
           </button>
           <div
-            className="bg-slate-500 border-slate-300 text-white outline-slate-400 px-4 py-2 rounded-md"
+            className={"border-slate-300 text-white outline-slate-400 px-4 py-2 rounded-md " + cores[user.permLevel]}
             key={user.id}
           >
             <p>{user.name}</p>
             <p>{user.email}</p>
-            <p>{user.password}</p>
+            <p>{permissions[user.permLevel]}</p>
           </div>
         </div>
       </div>

@@ -42,32 +42,40 @@ function Navbar() {
 
   async function autenticate() {
     await api
-      .post("/users/autenticar", {}, {
-        headers: { authorization: "Bearer " + localStorage.getItem("token") },
-      })
+      .post(
+        "/users/autenticar",
+        {},
+        {
+          headers: { authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      )
       .then(() => {
         setShowLogged(false);
       })
       .catch(() => {});
   }
 
-  useEffect(() => async function () {
-    autenticate();
-  }, []);
+  useEffect(
+    () =>
+      async function () {
+        autenticate();
+      },
+    []
+  );
 
   return (
-    <nav className="h-[10vh] max-w-[100%] bg-green-800 border-b-2 border-white flex items-center justify-around">
-      <h1 className="uppercase text-3xl font-bold text-white tracking-[10px]">
+    <nav className="h-[10vh] max-h-[10%] max-w-[100vw] overflow-auto min-w-[100%] bg-green-800 border-b-2 border-white flex items-center justify-around">
+      <h1 className="uppercase text-2xl font-bold text-white tracking-[5px] xl:tracking-[10px] xl:text-3xl">
         Logo
       </h1>
       <div>
-        <ul className="flex gap-10">
+        <ul className="flex gap-3 xl:gap-10">
           {botoes.map(
             (botao) =>
               botao.showLogged && (
                 <li
                   key={botao.id}
-                  className="uppercase font-bold text-white cursor-pointer"
+                  className="text-xs xl:text-lg uppercase font-bold text-white cursor-pointer"
                 >
                   <a onClick={botao.onClick} href={botao.link}>
                     {botao.nome}
