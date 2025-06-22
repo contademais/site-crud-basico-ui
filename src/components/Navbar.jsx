@@ -48,7 +48,7 @@ function Navbar() {
   }, [])
 
   return (
-    <nav className="h-[10vh] max-h-[10%] max-w-[100vw] overflow-auto min-w-[100%] bg-green-800 border-b-2 border-white flex items-center justify-around">
+    <nav className="h-[10vh] max-h-[10%] max-w-[100vw] overflow-auto lg:overflow-hidden min-w-[100%] bg-green-800 border-b-2 border-white flex items-center justify-around">
       <h1 className="uppercase text-2xl font-bold text-white tracking-[5px] xl:tracking-[10px] xl:text-3xl">
         Logo
       </h1>

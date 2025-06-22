@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import api from "../services/api";
 import { useEffect, useState } from "react";
+import { BookPlus, BookMinus } from "lucide-react";
 
 function Sobre() {
   let [users, setUsers] = useState([]);
@@ -70,6 +71,46 @@ function Sobre() {
     }
   }
 
+  async function PromoteUser(id) {
+    await api
+      .put(
+        `/users/promote/${id}`,
+        {
+          permLevel: users.find((user) => user.id === id).permLevel,
+        },
+        {
+          headers: { authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      )
+      .then((res) => {
+        Usuarios();
+        alert(`Usuário promovido à ${permissions[res.data.permLevel]}!`);
+      })
+      .catch((e) => {
+        alert(e.response.data.message);
+      });
+  }
+
+  async function DemoteUser(id) {
+    await api
+      .put(
+        `/users/demote/${id}`,
+        {
+          permLevel: users.find((user) => user.id === id).permLevel,
+        },
+        {
+          headers: { authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      )
+      .then((res) => {
+        Usuarios();
+        alert(`Usuário rebaixado à ${permissions[res.data.permLevel]}!`);
+      })
+      .catch((e) => {
+        alert(e.response.data.message);
+      });
+  }
+
   useEffect(() => {
     Usuarios();
   }, []);
@@ -79,15 +120,15 @@ function Sobre() {
       <Navbar />
       <div
         id="main"
-        className="min-h-[90vh] max-w-[100%] overflow-x-hidden h-auto flex items-center justify-center"
+        className="min-h-[90vh] max-w-[100vw] overflow-x-hidden h-auto flex items-center justify-center"
       >
-        <div className="w-[100%] max-w-[100%] flex flex-col items-center">
-          <div className="space-y-10 h-auto max-w-[100%]">
+        <div className="w-[100%] max-w-[100vw] flex flex-col overflow-x-hidden items-center">
+          <div className="space-y-10 h-auto max-w-[100vw] overflow-x-hidden">
             {users.map((user) => (
               <div
                 key={user.id}
                 className={
-                  "w-[250px] md:w-[300px] rounded-2xl p-5 font-bold text-white " +
+                  "w-[250px] lg:w-[300px] rounded-2xl p-5 font-bold text-white " +
                   cores[user.permLevel]
                 }
               >
@@ -112,12 +153,27 @@ function Sobre() {
                 <div className="flex gap-2">
                   {podaApagar ? (
                     <button
+                      alt="Apagar"
                       className="bg-red-600 py-2 px-4 rounded-md cursor-pointer mt-5"
                       onClick={() => ApagarUser(user.id)}
                     >
                       Apagar usuário
                     </button>
                   ) : null}
+                  <button
+                    title="Promover"
+                    className="cursor-pointer relative bottom-[-10px]"
+                    onClick={() => PromoteUser(user.id)}
+                  >
+                    <BookPlus size={32} />
+                  </button>
+                  <button
+                    title="Rebaixar"
+                    className="cursor-pointer relative bottom-[-10px]"
+                    onClick={() => DemoteUser(user.id)}
+                  >
+                    <BookMinus size={32} />
+                  </button>
                 </div>
               </div>
             ))}
