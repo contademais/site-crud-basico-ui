@@ -75,11 +75,11 @@ function Sobre() {
   }, []);
 
   return (
-    <div className="h-auto min-h-screen max-w-[100%] min-w-screen bg-green-800">
+    <div className="h-auto min-h-screen max-w-[100%] overflow-x-hidden min-w-screen bg-green-800">
       <Navbar />
       <div
         id="main"
-        className="min-h-[90vh] max-w-[100%] h-auto flex items-center justify-center"
+        className="min-h-[90vh] max-w-[100%] overflow-x-hidden h-auto flex items-center justify-center"
       >
         <div className="w-[100%] max-w-[100%] flex flex-col items-center">
           <div className="space-y-10 h-auto max-w-[100%]">

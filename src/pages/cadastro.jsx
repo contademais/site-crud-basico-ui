@@ -57,7 +57,7 @@ function Cadastro() {
       <div id="main" className="h-[90vh] flex items-center justify-center">
         <div
           id="form"
-          className="bg-white h-auto w-[300px] md:w-[400px] rounded-3xl flex flex-col items-center gap-7"
+          className="bg-white h-auto w-[300px] lg:w-[400px] rounded-3xl flex flex-col items-center gap-7"
         >
           <h1 className="mt-3 font-bold text-3xl">Cadastro</h1>
           <div className="flex flex-col w-[80%] items-center-safe">
@@ -90,7 +90,7 @@ function Cadastro() {
                     type={tipoSenha}
                     ref={inputPassword}
                     placeholder="Insira sua senha"
-                    className="bg-slate-200 border-slate-300 outline-slate-400 px-4 py-2 rounded-md mr-1 md:mr-3"
+                    className="bg-slate-200 border-slate-300 outline-slate-400 px-4 py-2 rounded-md mr-1 lg:mr-3"
                     onPaste={(e) => e.preventDefault()}
                   />
                   <button

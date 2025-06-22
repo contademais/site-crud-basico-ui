@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import api from "../services/api";
 
 function Navbar() {
   const [showLogged, setShowLogged] = useState(true);
@@ -40,28 +39,13 @@ function Navbar() {
     },
   ];
 
-  async function autenticate() {
-    await api
-      .post(
-        "/users/autenticar",
-        {},
-        {
-          headers: { authorization: "Bearer " + localStorage.getItem("token") },
-        }
-      )
-      .then(() => {
-        setShowLogged(false);
-      })
-      .catch(() => {});
-  }
-
-  useEffect(
-    () =>
-      async function () {
-        autenticate();
-      },
-    []
-  );
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setShowLogged(false);
+    } else {
+      setShowLogged(true);
+    }
+  }, [])
 
   return (
     <nav className="h-[10vh] max-h-[10%] max-w-[100vw] overflow-auto min-w-[100%] bg-green-800 border-b-2 border-white flex items-center justify-around">
